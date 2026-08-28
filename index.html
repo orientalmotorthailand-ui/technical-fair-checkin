@@ -1,42 +1,99 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="th">
 
 <head>
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
 
-  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <meta
+    name="viewport"
+    content="
+      width=device-width,
+      initial-scale=1.0
+    "
+  >
+
+
+  <title>
+    Technical Fair Rayong 2026 - Check-in
+  </title>
+
+
+  <!-- QR Scanner Library -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"
+  ></script>
 
 
   <style>
 
+    * {
+      box-sizing: border-box;
+    }
+
+
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
+
+      margin: 0;
+
       padding: 20px;
-      background: #f5f5f5;
+
+      font-family:
+
+        Arial,
+        sans-serif;
+
+      background:
+
+        #f4f6f8;
+
+      text-align: center;
+
     }
 
 
-    h2 {
-      margin-bottom: 25px;
-    }
+    .container {
 
-
-    #video-container {
-
-      width: 100%;
       max-width: 600px;
 
       margin: auto;
 
-      background: black;
+      background: white;
 
-      border-radius: 10px;
+      padding: 30px;
 
-      overflow: hidden;
+      border-radius: 15px;
+
+      box-shadow:
+
+        0 5px 20px
+
+        rgba(
+          0,
+          0,
+          0,
+          0.1
+        );
+
+    }
+
+
+    h1 {
+
+      font-size: 28px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .subtitle {
+
+      color: #666;
+
+      margin-bottom: 25px;
 
     }
 
@@ -45,6 +102,12 @@
 
       width: 100%;
 
+      max-height: 450px;
+
+      border-radius: 10px;
+
+      background: black;
+
       display: none;
 
     }
@@ -52,86 +115,238 @@
 
     #canvas {
 
-      width: 100%;
-
       display: none;
 
     }
 
 
-    .btn {
+    .button-area {
 
-      padding: 12px 25px;
-
-      font-size: 16px;
-
-      border: none;
-
-      border-radius: 6px;
-
-      color: white;
-
-      cursor: pointer;
-
-      margin: 10px;
+      margin-top: 20px;
 
     }
 
 
-    .btn-start {
+    button {
 
-      background: #1976d2;
+      padding:
+
+        14px 25px;
+
+      margin:
+
+        5px;
+
+      font-size:
+
+        16px;
+
+      font-weight:
+
+        bold;
+
+      border:
+
+        none;
+
+      border-radius:
+
+        8px;
+
+      cursor:
+
+        pointer;
 
     }
 
 
-    .btn-stop {
+    #startButton {
 
-      background: #d32f2f;
+      background:
+
+        #1976d2;
+
+      color:
+
+        white;
+
+    }
+
+
+    #stopButton {
+
+      background:
+
+        #e53935;
+
+      color:
+
+        white;
 
     }
 
 
     #status {
 
-      max-width: 600px;
+      margin-top:
 
-      margin: 20px auto;
+        25px;
 
-      padding: 20px;
+      padding:
 
-      border-radius: 8px;
+        20px;
 
-      font-size: 18px;
+      border-radius:
 
-      background: white;
+        10px;
+
+      font-size:
+
+        18px;
+
+      font-weight:
+
+        bold;
+
+      min-height:
+
+        60px;
+
+      display:
+
+        flex;
+
+      justify-content:
+
+        center;
+
+      align-items:
+
+        center;
 
     }
 
 
-    .success {
+    .waiting {
 
-      background: #d4edda !important;
+      background:
 
-      color: #155724;
+        #e3f2fd;
 
-    }
+      color:
 
-
-    .error {
-
-      background: #f8d7da !important;
-
-      color: #721c24;
+        #1565c0;
 
     }
 
 
     .loading {
 
-      background: #fff3cd !important;
+      background:
 
-      color: #856404;
+        #fff3cd;
+
+      color:
+
+        #856404;
+
+    }
+
+
+    .success {
+
+      background:
+
+        #d4edda;
+
+      color:
+
+        #155724;
+
+    }
+
+
+    .warning {
+
+      background:
+
+        #fff3cd;
+
+      color:
+
+        #856404;
+
+    }
+
+
+    .error {
+
+      background:
+
+        #f8d7da;
+
+      color:
+
+        #721c24;
+
+    }
+
+
+    .manual-box {
+
+      margin-top:
+
+        25px;
+
+      padding-top:
+
+        20px;
+
+      border-top:
+
+        1px solid #ddd;
+
+    }
+
+
+    #manualId {
+
+      width:
+
+        100%;
+
+      padding:
+
+        12px;
+
+      font-size:
+
+        16px;
+
+      border:
+
+        1px solid #ccc;
+
+      border-radius:
+
+        8px;
+
+    }
+
+
+    #manualButton {
+
+      margin-top:
+
+        10px;
+
+      background:
+
+        #555;
+
+      color:
+
+        white;
 
     }
 
@@ -141,71 +356,141 @@
 </head>
 
 
-
 <body>
 
 
-  <h2>
-    Check-in Technical Fair
-  </h2>
+<div class="container">
 
 
-
-  <div id="video-container">
-
-    <video
-      id="video"
-      autoplay
-      playsinline>
-    </video>
+  <h1>
+    Check-in
+    Technical Fair Rayong 2026
+  </h1>
 
 
-    <canvas
-      id="canvas">
-    </canvas>
+  <div class="subtitle">
+
+    สแกน QR Code
+    เพื่อเช็คอินเข้างาน
 
   </div>
 
 
+  <!-- VIDEO -->
 
-  <div>
+  <video
+    id="video"
+    playsinline
+  ></video>
+
+
+  <!-- CANVAS -->
+
+  <canvas
+    id="canvas"
+  ></canvas>
+
+
+  <!-- BUTTON -->
+
+  <div class="button-area">
+
 
     <button
-      class="btn btn-start"
-      onclick="startScan()">
+      id="startButton"
+      onclick="startScan()"
+    >
 
-      📷 เปิดกล้อง
+      📷 เปิดกล้องเพื่อสแกน
 
     </button>
 
 
     <button
-      class="btn btn-stop"
-      onclick="stopScan()">
+      id="stopButton"
+      onclick="stopScan()"
+    >
 
-      ⛔ ปิดกล้อง
+      ปิดกล้อง
 
     </button>
 
-  </div>
-
-
-
-  <div id="status">
-
-    พร้อมสแกน QR Code
 
   </div>
 
+
+  <!-- STATUS -->
+
+  <div
+    id="status"
+    class="waiting"
+  >
+
+    พร้อมสำหรับการสแกน
+
+  </div>
+
+
+  <!-- MANUAL INPUT -->
+
+  <div class="manual-box">
+
+
+    <p>
+
+      กรณี QR Code
+      สแกนไม่ได้
+
+    </p>
+
+
+    <input
+
+      type="text"
+
+      id="manualId"
+
+      placeholder="
+        กรอก Registration ID
+      "
+
+    >
+
+
+    <button
+      id="manualButton"
+      onclick="manualCheckIn()"
+    >
+
+      ตรวจสอบ
+
+    </button>
+
+
+  </div>
+
+
+</div>
 
 
 
 <script>
 
 
-// ========================================
-// Element
-// ========================================
+// ===============================================================
+// ตั้งค่า API URL
+// ===============================================================
+
+// สำคัญมาก
+// นำ URL จาก Apps Script มาใส่ตรงนี้
+
+const APPS_SCRIPT_URL =
+  "ใส่_APPS_SCRIPT_URL_ตรงนี้";
+
+
+// ===============================================================
+// ELEMENT
+// ===============================================================
 
 const video =
   document.getElementById("video");
@@ -223,24 +508,26 @@ const statusDiv =
   document.getElementById("status");
 
 
-
-// ========================================
-// ตัวแปรควบคุม
-// ========================================
-
-let scanning = false;
-
-let processing = false;
-
-let currentStream = null;
-
-let lastScannedCode = "";
+const manualIdInput =
+  document.getElementById("manualId");
 
 
+let scanning =
+  false;
 
-// ========================================
-// เปิดกล้อง
-// ========================================
+
+let currentStream =
+  null;
+
+
+let isProcessing =
+  false;
+
+
+
+// ===============================================================
+// START CAMERA
+// ===============================================================
 
 async function startScan() {
 
@@ -248,50 +535,77 @@ async function startScan() {
   try {
 
 
-    // ถ้ากำลังเปิดอยู่
-    if (scanning) {
+    // ตรวจสอบ Browser
+
+    if (
+
+      !navigator.mediaDevices ||
+
+      !navigator.mediaDevices.getUserMedia
+
+    ) {
+
+
+      showStatus(
+
+        "Browser นี้ไม่รองรับการใช้กล้อง",
+
+        "error"
+
+      );
+
 
       return;
+
 
     }
 
 
-    statusDiv.innerHTML =
-      "📷 กำลังเปิดกล้อง...";
+    // ป้องกันการเปิดซ้ำ
+
+    if (
+      currentStream
+    ) {
 
 
-    statusDiv.className =
-      "loading";
+      stopCamera();
 
 
-    // ====================================
-    // ขอเปิดกล้อง
-    // ====================================
+    }
+
+
+    showStatus(
+
+      "กำลังเปิดกล้อง...",
+
+      "loading"
+
+    );
+
+
+    // เปิดกล้อง
 
     const stream =
+
       await navigator
-      .mediaDevices
-      .getUserMedia({
+        .mediaDevices
+        .getUserMedia({
 
-        video: {
+          video: {
 
-          facingMode: {
-            ideal: "environment"
+            facingMode: {
+
+              ideal:
+                "environment"
+
+            }
+
           },
 
-          width: {
-            ideal: 1280
-          },
+          audio:
+            false
 
-          height: {
-            ideal: 720
-          }
-
-        },
-
-        audio: false
-
-      });
+        });
 
 
     currentStream =
@@ -302,136 +616,137 @@ async function startScan() {
       stream;
 
 
+    await video.play();
+
+
     video.style.display =
       "block";
-
-
-    await video.play();
 
 
     scanning =
       true;
 
 
-    processing =
+    isProcessing =
       false;
 
 
-    statusDiv.innerHTML =
-      "📱 พร้อมสแกน QR Code";
+    showStatus(
+
+      "กำลังสแกน QR Code...",
+
+      "waiting"
+
+    );
 
 
-    statusDiv.className =
-      "";
+    requestAnimationFrame(
+      tick
+    );
 
-
-    requestAnimationFrame(tick);
-
-
-
-  } catch (error) {
-
-
-    console.error(error);
-
-
-    statusDiv.innerHTML =
-      "❌ ไม่สามารถเปิดกล้องได้<br><br>" +
-      error.name +
-      "<br>" +
-      error.message;
-
-
-    statusDiv.className =
-      "error";
 
   }
+
+
+  catch (
+    error
+  ) {
+
+
+    console.error(
+      "Camera Error:",
+      error
+    );
+
+
+    let message =
+      "ไม่สามารถเปิดกล้องได้";
+
+
+    if (
+
+      error.name ===
+      "NotAllowedError"
+
+    ) {
+
+
+      message =
+        "ไม่ได้รับอนุญาตให้ใช้กล้อง กรุณาอนุญาต Camera";
+
+
+    }
+
+
+    else if (
+
+      error.name ===
+      "NotFoundError"
+
+    ) {
+
+
+      message =
+        "ไม่พบกล้องในอุปกรณ์นี้";
+
+
+    }
+
+
+    else if (
+
+      error.name ===
+      "NotReadableError"
+
+    ) {
+
+
+      message =
+        "กล้องกำลังถูกใช้งานโดยโปรแกรมอื่น";
+
+
+    }
+
+
+    showStatus(
+
+      message,
+
+      "error"
+
+    );
+
+
+  }
+
 
 }
 
 
 
-// ========================================
-// ปิดกล้อง
-// ========================================
-
-function stopScan() {
-
-
-  scanning =
-    false;
-
-
-  processing =
-    false;
-
-
-  if (currentStream) {
-
-
-    currentStream
-      .getTracks()
-      .forEach(track => {
-
-        track.stop();
-
-      });
-
-
-    currentStream =
-      null;
-
-  }
-
-
-  video.srcObject =
-    null;
-
-
-  video.style.display =
-    "none";
-
-
-  statusDiv.innerHTML =
-    "⛔ ปิดกล้องแล้ว";
-
-
-  statusDiv.className =
-    "";
-
-}
-
-
-
-// ========================================
-// Scan QR
-// ========================================
+// ===============================================================
+// QR SCANNING LOOP
+// ===============================================================
 
 function tick() {
 
 
-  // ถ้าหยุดสแกน
-  if (!scanning) {
-
-    return;
-
-  }
-
-
-  // ถ้ากำลังประมวลผล
-  if (processing) {
-
-    requestAnimationFrame(tick);
-
-    return;
-
-  }
-
-
-  // ตรวจสอบว่ากล้องพร้อม
   if (
+    !scanning
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  if (
+
     video.readyState ===
     video.HAVE_ENOUGH_DATA
+
   ) {
 
 
@@ -458,8 +773,8 @@ function tick() {
     );
 
 
-
     const imageData =
+
       canvas.getImageData(
 
         0,
@@ -473,8 +788,8 @@ function tick() {
       );
 
 
-
     const code =
+
       jsQR(
 
         imageData.data,
@@ -493,223 +808,497 @@ function tick() {
       );
 
 
+    // -----------------------------------------------------------
+    // พบ QR Code
+    // -----------------------------------------------------------
 
-    // ==================================
-    // เจอ QR Code
-    // ==================================
+    if (
 
-    if (code) {
+      code &&
+
+      !isProcessing
+
+    ) {
+
+
+      isProcessing =
+        true;
+
+
+      scanning =
+        false;
 
 
       const registrationId =
-        code.data
-        .trim()
-        .toUpperCase();
+
+        code.data.trim();
 
 
+      showStatus(
 
-      // ป้องกันการอ่านซ้ำ
-      if (
-        registrationId ===
-        lastScannedCode
-      ) {
+        "กำลังตรวจสอบ...",
 
-        requestAnimationFrame(tick);
+        "loading"
 
-        return;
-
-      }
+      );
 
 
-      processQR(
+      checkIn(
         registrationId
       );
 
 
       return;
 
+
     }
+
 
   }
 
 
-  requestAnimationFrame(tick);
+  requestAnimationFrame(
+    tick
+  );
+
 
 }
 
 
 
-// ========================================
-// ส่งข้อมูลไป Apps Script
-// ========================================
+// ===============================================================
+// CHECK-IN VIA APPS SCRIPT
+// ===============================================================
 
-function processQR(registrationId) {
+function checkIn(
+  registrationId
+) {
 
 
-  // ล็อกไม่ให้ยิงซ้ำ
-  processing =
+  // สร้างชื่อ Callback
+  // ต้องไม่ซ้ำกัน
+
+  const callbackName =
+
+    "checkinCallback_" +
+
+    Date.now() +
+
+    "_" +
+
+    Math.floor(
+      Math.random() * 100000
+    );
+
+
+  // สร้าง URL
+
+  const url =
+
+    APPS_SCRIPT_URL +
+
+    "?action=checkin" +
+
+    "&registrationId=" +
+
+    encodeURIComponent(
+      registrationId
+    ) +
+
+    "&callback=" +
+
+    callbackName;
+
+
+  // สร้าง Callback Function
+
+  window[
+    callbackName
+  ] = function(
+    response
+  ) {
+
+
+    console.log(
+      "API Response:",
+      response
+    );
+
+
+    // ลบ Script
+
+    script.remove();
+
+
+    // ลบ Callback
+
+    delete window[
+      callbackName
+    ];
+
+
+    // แสดงผล
+
+    handleResponse(
+      response
+    );
+
+
+  };
+
+
+  // สร้าง Script
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.src =
+    url;
+
+
+  script.onerror =
+    function() {
+
+
+      delete window[
+        callbackName
+      ];
+
+
+      showStatus(
+
+        "ไม่สามารถเชื่อมต่อระบบ Check-in ได้",
+
+        "error"
+
+      );
+
+
+      restartScanning();
+
+
+    };
+
+
+  // ส่ง Request
+
+  document
+    .body
+    .appendChild(
+      script
+    );
+
+
+}
+
+
+
+// ===============================================================
+// HANDLE RESPONSE
+// ===============================================================
+
+function handleResponse(
+  response
+) {
+
+
+  if (
+
+    response.status ===
+    "success"
+
+  ) {
+
+
+    showStatus(
+
+      "✅ " +
+      response.message,
+
+      "success"
+
+    );
+
+
+  }
+
+
+  else if (
+
+    response.status ===
+    "already_checked_in"
+
+  ) {
+
+
+    showStatus(
+
+      "⚠️ " +
+      response.message,
+
+      "warning"
+
+    );
+
+
+  }
+
+
+  else {
+
+
+    showStatus(
+
+      "❌ " +
+      response.message,
+
+      "error"
+
+    );
+
+
+  }
+
+
+  // -------------------------------------------------------------
+  // รอ 3 วินาที
+  // -------------------------------------------------------------
+
+  setTimeout(
+
+    function() {
+
+
+      restartScanning();
+
+
+    },
+
+    3000
+
+  );
+
+
+}
+
+
+
+// ===============================================================
+// RESTART SCANNER
+// ===============================================================
+
+function restartScanning() {
+
+
+  if (
+    currentStream
+  ) {
+
+
+    isProcessing =
+      false;
+
+
+    scanning =
+      true;
+
+
+    showStatus(
+
+      "พร้อมสแกน QR Code...",
+
+      "waiting"
+
+    );
+
+
+    requestAnimationFrame(
+      tick
+    );
+
+
+  }
+
+
+}
+
+
+
+// ===============================================================
+// STOP CAMERA
+// ===============================================================
+
+function stopScan() {
+
+
+  scanning =
+    false;
+
+
+  isProcessing =
+    false;
+
+
+  stopCamera();
+
+
+  showStatus(
+
+    "ปิดกล้องแล้ว",
+
+    "waiting"
+
+  );
+
+
+}
+
+
+
+function stopCamera() {
+
+
+  if (
+    currentStream
+  ) {
+
+
+    currentStream
+      .getTracks()
+      .forEach(
+
+        function(
+          track
+        ) {
+
+
+          track.stop();
+
+
+        }
+
+      );
+
+
+    currentStream =
+      null;
+
+
+  }
+
+
+  video.srcObject =
+    null;
+
+
+  video.style.display =
+    "none";
+
+
+}
+
+
+
+// ===============================================================
+// MANUAL CHECK-IN
+// ===============================================================
+
+function manualCheckIn() {
+
+
+  const registrationId =
+
+    manualIdInput
+      .value
+      .trim();
+
+
+  if (
+    registrationId === ""
+  ) {
+
+
+    showStatus(
+
+      "กรุณากรอก Registration ID",
+
+      "error"
+
+    );
+
+
+    return;
+
+
+  }
+
+
+  if (
+    isProcessing
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  isProcessing =
     true;
 
 
-  // จำ QR ล่าสุด
-  lastScannedCode =
-    registrationId;
+  scanning =
+    false;
 
 
-  statusDiv.innerHTML =
-    "⏳ กำลังตรวจสอบข้อมูล...<br><br>" +
-    registrationId;
+  showStatus(
+
+    "กำลังตรวจสอบ...",
+
+    "loading"
+
+  );
 
 
-  statusDiv.className =
-    "loading";
-
-
-  console.log(
-    "Scanning:",
+  checkIn(
     registrationId
   );
 
 
+  manualIdInput.value =
+    "";
 
-  // =====================================
-  // ส่งไป Google Apps Script
-  // =====================================
-
-  google.script.run
-
-
-    // -----------------------------------
-    // สำเร็จ
-    // -----------------------------------
-
-    .withSuccessHandler(
-      function(response) {
-
-
-        console.log(
-          response
-        );
-
-
-        statusDiv.innerHTML =
-          response.message;
-
-
-        if (response.success) {
-
-
-          statusDiv.className =
-            "success";
-
-
-        } else {
-
-
-          statusDiv.className =
-            "error";
-
-        }
-
-
-
-        // รอ 3 วินาที
-        setTimeout(
-
-          function() {
-
-
-            processing =
-              false;
-
-
-            lastScannedCode =
-              "";
-
-
-            statusDiv.innerHTML =
-              "📱 พร้อมสแกน QR Code";
-
-
-            statusDiv.className =
-              "";
-
-
-          },
-
-          3000
-
-        );
-
-      }
-    )
-
-
-
-    // -----------------------------------
-    // ถ้า Apps Script Error
-    // -----------------------------------
-
-    .withFailureHandler(
-      function(error) {
-
-
-        console.error(
-          error
-        );
-
-
-        statusDiv.innerHTML =
-          "❌ เกิดข้อผิดพลาด<br><br>" +
-          error.message;
-
-
-        statusDiv.className =
-          "error";
-
-
-
-        setTimeout(
-
-          function() {
-
-
-            processing =
-              false;
-
-
-            lastScannedCode =
-              "";
-
-
-            statusDiv.innerHTML =
-              "📱 พร้อมสแกน QR Code";
-
-
-            statusDiv.className =
-              "";
-
-          },
-
-          3000
-
-        );
-
-      }
-    )
-
-
-    // เรียก Function
-    .processCheckIn(
-      registrationId
-    );
 
 }
 
 
 
-</script>
+// ===============================================================
+// STATUS
+// ===============================================================
 
+function showStatus(
+  message,
+  type
+) {
+
+
+  statusDiv.innerText =
+    message;
+
+
+  statusDiv.className =
+    type;
+
+
+}
+
+
+</script>
 
 
 </body>
